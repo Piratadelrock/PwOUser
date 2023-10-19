@@ -71,13 +71,12 @@ public class UserController {
         return response;
     }
 
-//    @DeleteMapping("/{id}")
-//    public void deleteUser(@PathVariable int id) {
-//
-//            userService.deleteUserPwO(id);
-//
-//    }
-//
+    @DeleteMapping("/{id}")
+    public void deleteUser(@PathVariable int id) {
+            userService.deleteUserPwO(id);
+    }
+
+
 //    @PutMapping
 //    public ResponseEntity<Object> updateUser(@RequestBody UserPwO updateUserPwO){
 //        ResponseEntity<Object> response;

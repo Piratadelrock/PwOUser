@@ -36,12 +36,12 @@ public class UserService {
         return userRepository.save(bodyUsers);
     }
 //
-//    public void deleteDiscapUser(int id){
-//        userRepository.deleteById(id);
-//    }
+    public void deleteUserPwO(int id){
+        userRepository.deleteById(id);
+    }
 //
-//    public DiscapUser updateUserByFields(int id, Map<String, Object> fields) {
-//        Optional<DiscapUser> existingUser = userRepository.findById(id);
+//    public UserPwO updateUserByFields(int id, Map<String, Object> fields) {
+//        Optional<UserPwO> existingUser = userRepository.findById(id);
 //        if(existingUser.isPresent()) {
 //            fields.forEach((key, value) -> {
 //                Field field = ReflectionUtils.findField(DiscapUser.class, key);
