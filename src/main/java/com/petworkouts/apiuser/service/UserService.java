@@ -30,11 +30,11 @@ public class UserService {
         return userRepository.findUserByEmail(email);
     }
 
-//
-//    public UserPwO saveDiscapUser(UserPwO bodyDiscapUsers){
+
+    public UserPwO saveUserPwO(UserPwO bodyUsers){
 //        messageSenderClient.execute(bodyDiscapUsers, (bodyDiscapUsers.getPersonID().toString()));
-//        return userRepository.save(bodyDiscapUsers);
-//    }
+        return userRepository.save(bodyUsers);
+    }
 //
 //    public void deleteDiscapUser(int id){
 //        userRepository.deleteById(id);

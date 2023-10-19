@@ -46,31 +46,31 @@ public class UserController {
         ResponseEntity<Object> response;
         try{
             Optional<UserPwO> UsersPwo = userService.getUserByEmail(email);
-            CustomResponse customResponse = new CustomResponse("Consulta del cliente exitosa: " + email, HttpStatus.OK);
+            CustomResponse customResponse = new CustomResponse("Consulta del usuario exitosa: " + email, HttpStatus.OK);
             customResponse.setResults(UsersPwo);
             response = new ResponseEntity<>(customResponse, HttpStatus.OK);
         } catch (Exception e) {
-            response = new ResponseEntity<>("No se pudo encontrar el cliente con el email: " + email, HttpStatus.BAD_REQUEST);
+            response = new ResponseEntity<>("No se pudo encontrar el usuario con el email: " + email, HttpStatus.BAD_REQUEST);
         }
         return response;
     }
-//
-//    @PostMapping
-//    public ResponseEntity<Object> newUser(@RequestBody UserPwO newUserPwO) {
-//        ResponseEntity<Object> response;
-//        try{
-//            userService.saveUserPwO(newUserPwO);
-//            CustomResponse customResponse = new CustomResponse("Creacion del cliente fue exitosa", HttpStatus.OK);
-//            customResponse.setResults(newUserPwO);
-//            response = new ResponseEntity<>(customResponse, HttpStatus.OK);
-//
-//
-//        } catch (Exception e) {
-//            response = new ResponseEntity<>("Disculpa tenemos un error tratando de crear el cliente" + newUserPwO, HttpStatus.BAD_REQUEST);
-//        }
-//        return response;
-//    }
-//
+
+    @PostMapping
+    public ResponseEntity<Object> newUser(@RequestBody UserPwO newUserPwO) {
+        ResponseEntity<Object> response;
+        try{
+            userService.saveUserPwO(newUserPwO);
+            CustomResponse customResponse = new CustomResponse("Creacion del usuario fue exitosa", HttpStatus.OK);
+            customResponse.setResults(newUserPwO);
+            response = new ResponseEntity<>(customResponse, HttpStatus.OK);
+
+
+        } catch (Exception e) {
+            response = new ResponseEntity<>("Disculpa tenemos un error tratando de crear el usuario" + newUserPwO, HttpStatus.BAD_REQUEST);
+        }
+        return response;
+    }
+
 //    @DeleteMapping("/{id}")
 //    public void deleteUser(@PathVariable int id) {
 //
@@ -83,13 +83,13 @@ public class UserController {
 //        ResponseEntity<Object> response;
 //        try{
 //            userService.saveUserPwO(updateUserPwO);
-//            CustomResponse customResponse = new CustomResponse("Actualizacion del cliente fue exitosa", HttpStatus.OK);
+//            CustomResponse customResponse = new CustomResponse("Actualizacion del usuario fue exitosa", HttpStatus.OK);
 //            customResponse.setResults(updateUserPwO);
 //            response = new ResponseEntity<>(customResponse, HttpStatus.OK);
 //
 //
 //        } catch (Exception e) {
-//            response = new ResponseEntity<>("Disculpa tenemos un error tratando de actualizar el cliente" + updateUserPwO, HttpStatus.BAD_REQUEST);
+//            response = new ResponseEntity<>("Disculpa tenemos un error tratando de actualizar el usuario" + updateUserPwO, HttpStatus.BAD_REQUEST);
 //        }
 //        return response;
 //    }
