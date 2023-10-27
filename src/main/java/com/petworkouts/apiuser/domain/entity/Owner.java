@@ -8,10 +8,10 @@ import javax.persistence.*;
 
 @Data
 @Entity
-@Table(name = "UserPwO", uniqueConstraints = {
+@Table(name = "Owner", uniqueConstraints = {
       @UniqueConstraint(columnNames = { "email" }), @UniqueConstraint(columnNames = { "document" })
 })
-public class UserPwO {
+public class Owner {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

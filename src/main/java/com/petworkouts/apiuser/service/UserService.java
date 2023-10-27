@@ -1,11 +1,14 @@
 package com.petworkouts.apiuser.service;
 
-import com.petworkouts.apiuser.domain.entity.UserPwO;
+import com.petworkouts.apiuser.domain.entity.Owner;
 import com.petworkouts.apiuser.reporsitory.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ReflectionUtils;
 
+import java.lang.reflect.Field;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -19,20 +22,19 @@ public class UserService {
 //        this.messageSenderClient = messageSenderClient;
 //    }
 
-    public List<UserPwO> getAllUserPerson(){
+    public List<Owner> getAllUserPerson(){
         return userRepository.findByUserList();
     }
-    public List<UserPwO> getUserByPersonId(int personId){
+    public List<Owner> getUserByPersonId(int personId){
         return userRepository.findUserByDocument(personId);
     }
 //
-    public Optional<UserPwO> getUserByEmail(String email){
+    public Optional<Owner> getUserByEmail(String email){
         return userRepository.findUserByEmail(email);
     }
 
 
-    public UserPwO saveUserPwO(UserPwO bodyUsers){
-//        messageSenderClient.execute(bodyDiscapUsers, (bodyDiscapUsers.getPersonID().toString()));
+    public Owner saveUserPwO(Owner bodyUsers){
         return userRepository.save(bodyUsers);
     }
 //
@@ -40,16 +42,16 @@ public class UserService {
         userRepository.deleteById(id);
     }
 //
-//    public UserPwO updateUserByFields(int id, Map<String, Object> fields) {
-//        Optional<UserPwO> existingUser = userRepository.findById(id);
-//        if(existingUser.isPresent()) {
-//            fields.forEach((key, value) -> {
-//                Field field = ReflectionUtils.findField(DiscapUser.class, key);
-//                field.setAccessible(true);
-//                ReflectionUtils.setField(field, existingUser.get(), value);
-//            });
-//            return userRepository.save(existingUser.get());
-//        }
-//        return null;
-//    }
+    public Owner updateUserByFields(int id, Map<String, Object> fields) {
+        Optional<Owner> existingUser = userRepository.findById(id);
+        if(existingUser.isPresent()) {
+            fields.forEach((key, value) -> {
+                Field field = ReflectionUtils.findField(Owner.class, key);
+                field.setAccessible(true);
+                ReflectionUtils.setField(field, existingUser.get(), value);
+            });
+            return userRepository.save(existingUser.get());
+        }
+        return null;
+    }
 }

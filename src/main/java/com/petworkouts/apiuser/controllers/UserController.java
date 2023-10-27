@@ -1,6 +1,6 @@
 package com.petworkouts.apiuser.controllers;
 
-import com.petworkouts.apiuser.domain.entity.UserPwO;
+import com.petworkouts.apiuser.domain.entity.Owner;
 import com.petworkouts.apiuser.response.CustomResponse;
 import com.petworkouts.apiuser.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @CrossOrigin(origins = "*")
@@ -29,7 +30,7 @@ public class UserController {
     public ResponseEntity<Object> getByDocument(@PathVariable int personId) {
         ResponseEntity<Object> response;
         try{
-            List<UserPwO> usersPwO = userService.getUserByPersonId(personId);
+            List<Owner> usersPwO = userService.getUserByPersonId(personId);
             CustomResponse customResponse = new CustomResponse("Consulta del usuario exitosa: " + personId, HttpStatus.OK);
             customResponse.setResults(usersPwO);
             response = new ResponseEntity<>(customResponse, HttpStatus.OK);
@@ -45,7 +46,7 @@ public class UserController {
     public ResponseEntity<Object> getByEmail(@PathVariable String email) {
         ResponseEntity<Object> response;
         try{
-            Optional<UserPwO> UsersPwo = userService.getUserByEmail(email);
+            Optional<Owner> UsersPwo = userService.getUserByEmail(email);
             CustomResponse customResponse = new CustomResponse("Consulta del usuario exitosa: " + email, HttpStatus.OK);
             customResponse.setResults(UsersPwo);
             response = new ResponseEntity<>(customResponse, HttpStatus.OK);
@@ -56,17 +57,17 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<Object> newUser(@RequestBody UserPwO newUserPwO) {
+    public ResponseEntity<Object> newUser(@RequestBody Owner newOwner) {
         ResponseEntity<Object> response;
         try{
-            userService.saveUserPwO(newUserPwO);
+            userService.saveUserPwO(newOwner);
             CustomResponse customResponse = new CustomResponse("Creacion del usuario fue exitosa", HttpStatus.OK);
-            customResponse.setResults(newUserPwO);
+            customResponse.setResults(newOwner);
             response = new ResponseEntity<>(customResponse, HttpStatus.OK);
 
 
         } catch (Exception e) {
-            response = new ResponseEntity<>("Disculpa tenemos un error tratando de crear el usuario" + newUserPwO, HttpStatus.BAD_REQUEST);
+            response = new ResponseEntity<>("Disculpa tenemos un error tratando de crear el usuario" + newOwner, HttpStatus.BAD_REQUEST);
         }
         return response;
     }
@@ -77,35 +78,35 @@ public class UserController {
     }
 
 
-//    @PutMapping
-//    public ResponseEntity<Object> updateUser(@RequestBody UserPwO updateUserPwO){
-//        ResponseEntity<Object> response;
-//        try{
-//            userService.saveUserPwO(updateUserPwO);
-//            CustomResponse customResponse = new CustomResponse("Actualizacion del usuario fue exitosa", HttpStatus.OK);
-//            customResponse.setResults(updateUserPwO);
-//            response = new ResponseEntity<>(customResponse, HttpStatus.OK);
-//
-//
-//        } catch (Exception e) {
-//            response = new ResponseEntity<>("Disculpa tenemos un error tratando de actualizar el usuario" + updateUserPwO, HttpStatus.BAD_REQUEST);
-//        }
-//        return response;
-//    }
-//
-//    @PatchMapping("/{id}")
-//    public ResponseEntity<Object> updateUserByFields(@PathVariable int id, @RequestBody Map<String, Object> fields){
-//        ResponseEntity<Object> response;
-//        try{
-//            userService.updateUserByFields(id,fields);
-//            CustomResponse customResponse = new CustomResponse(
-//                    "La actualización del id:" + id + " y los siguientes campos "
-//                            + fields + " fue exitosa", HttpStatus.OK);
-//            customResponse.setResults(fields);
-//            response = new ResponseEntity<>(customResponse, HttpStatus.OK);
-//        }catch (Exception e) {
-//            response = new ResponseEntity<>("El usuario con id:"+id+" o campo a modificar no existe", HttpStatus.BAD_REQUEST);
-//        }
-//        return response;
-//    }
+    @PutMapping
+    public ResponseEntity<Object> updateUser(@RequestBody Owner updateOwner){
+        ResponseEntity<Object> response;
+        try{
+            userService.saveUserPwO(updateOwner);
+            CustomResponse customResponse = new CustomResponse("Actualizacion del usuario fue exitosa", HttpStatus.OK);
+            customResponse.setResults(updateOwner);
+            response = new ResponseEntity<>(customResponse, HttpStatus.OK);
+
+
+        } catch (Exception e) {
+            response = new ResponseEntity<>("Disculpa tenemos un error tratando de actualizar el usuario" + updateOwner, HttpStatus.BAD_REQUEST);
+        }
+        return response;
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<Object> updateUserByFields(@PathVariable int id, @RequestBody Map<String, Object> fields){
+        ResponseEntity<Object> response;
+        try{
+            userService.updateUserByFields(id,fields);
+            CustomResponse customResponse = new CustomResponse(
+                    "La actualización del id:" + id + " y los siguientes campos "
+                            + fields + " fue exitosa", HttpStatus.OK);
+            customResponse.setResults(fields);
+            response = new ResponseEntity<>(customResponse, HttpStatus.OK);
+        }catch (Exception e) {
+            response = new ResponseEntity<>("El usuario con id:"+id+" o campo a modificar no existe", HttpStatus.BAD_REQUEST);
+        }
+        return response;
+    }
 }
